@@ -7,12 +7,28 @@ if (mysqli_connect_error()) {
 	die("Ошибка подключения к базе данных!");
 }
 
-//Сохраняем данные в БД
-
-$resultSuccess = "";
-$resultError = "";
 $errors = array();
 
+//Удаление фильма
+if ($_GET) {
+	if ($_GET['action'] == 'delete') {
+		//Запрос на удаление
+		$query = "DELETE FROM films WHERE id = ' " . mysqli_real_escape_string($link, $_GET['id']) . "'LIMIT 1";
+		//Выполняем запрос на удаление
+		mysqli_query($link, $query);
+		//Принимает в себя подключение к БД и возвращает количество рядов, которые были затроны при выполнении последнего запроса
+		if (mysqli_affected_rows($link) > 0) {
+			$resultInfo = "Фильм был удален!";
+		}
+	}
+}
+
+//Можно экранировать ошибки с помощью @
+/*if (@$_GET['action'] == 'delete') {
+	echo "Удаляем фильм";
+}*/
+
+//Сохраняем данные в БД
 if (array_key_exists('newFilm', $_POST)) {
 	
 	//Обработка ошибок
@@ -75,11 +91,15 @@ if ($result = mysqli_query($link, $query)) {
 <body class="index-page">
 	<div class="container user-content section-page">
 
-		<?php if ($resultSuccess) { ?>
+		<?php if (@$resultSuccess != '') { ?>
 			<div class="notify notify--success mb-20"><?=$resultSuccess?></div>
 		<?php }	?>
 
-		<?php if ($resultError) { ?>
+		<?php if (@$resultInfo != '') { ?>
+			<div class="notify notify--update mb-20"><?=$resultInfo?></div>
+		<?php }	?>
+
+		<?php if (@$resultError != '') { ?>
 			<div class="notify notify--error mb-20"><?=$resultError?></div>
 		<?php }	?>
 
@@ -87,7 +107,11 @@ if ($result = mysqli_query($link, $query)) {
 		<?php
 			foreach ($films as $key => $film) { ?>
 				<div class="card mb-20">
-					<h4 class="title-4"><?=@$film['title'] //@ гасит ошибки. Они не будут видны на странице ?></h4>
+					<div class="card__header">
+						<h4 class="title-4"><?=@$film['title'] //@ гасит ошибки. Они не будут видны на странице ?></h4>
+						<!--GET запрос на удаление карточки-->
+						<a href="?action=delete&id=<?=@$film['id']?>" class="button button--removesmall">Удалить</a>
+					</div>
 					<div class="badge"><?=@$film['genre']?></div>
 					<div class="badge"><?=@$film['year']?></div>
 				</div>
