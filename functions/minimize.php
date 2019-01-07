@@ -34,7 +34,7 @@ if (isset($_FILES['photo']['name']) && $_FILES['photo']['tmp_name'] != "") {
 
 	$uploadfile = $photoFolderLocation . $db_file_name;
 	//Перемещаем файл из временного хранилища в папку с изоражениями (data/films/)
-	$moveResult = move_uploaded_file($fileTmpLoc, $uploadfile);	
+	$moveResult = move_uploaded_file($fileTmpLoc, $uploadfile);
 
 	if ($moveResult != true) {
 		$errors[] = 'File upload failed';

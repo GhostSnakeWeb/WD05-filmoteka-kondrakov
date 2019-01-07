@@ -52,6 +52,7 @@ function get_film($link, $id){
 function film_update($link, $title, $genre, $year, $description, $id){
 
 	require_once("functions/minimize.php");
+
 	//Запись данных в БД
 	$query = "	UPDATE films 
 				SET title = '". mysqli_real_escape_string($link, $title) ."', 
