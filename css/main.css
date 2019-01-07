@@ -1379,10 +1379,10 @@ ul.admin-nav {
 }
 a.admin-nav__link {
   display: block;
-  text-decoration: none;
+  text-decoration: underline;
   padding: 5px;
   margin-right: 25px;
-  color: #383737;
+  color: #037ec6;
   -webkit-transition: color, 1s;
   -o-transition: color, 1s;
   transition: color, 1s;
