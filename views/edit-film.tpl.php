@@ -1,6 +1,5 @@
 <h1 class="title-1">Редактировать фильм</h1>
-<div class="panel-holder mt-80 mb-40">
-	<div class="title-3 mt-0">Редактировать фильм</div>
+<div class="panel-holder mt-30 mb-100">
 	<!-- enctype="multipart/form-data" - аттрибут для отправки формой файлов -->
 	<form enctype="multipart/form-data" action="edit.php?id=<?=$film['id']?>" method="POST">
 		<?php
