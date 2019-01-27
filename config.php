@@ -1,5 +1,4 @@
 <?php 
-
 //Константы задаются функцией define. Передаются 2 параметра: имя константы и значение.
 define('MYSQL_SERVER', 'localhost'); 
 define('MYSQL_USER', 'root');
@@ -10,8 +9,8 @@ define('MYSQL_DB', 'filmoteka');
 define('HOST', 'http://'. $_SERVER['HTTP_HOST'] .'/');
 //dirname(__FILE__) - вернет директорию в которой лежит config.php
 define('ROOT', dirname(__FILE__).'/');
-
+//Если вошел админ, то можем ему показывать его функционал
+session_start();
 //Выводит информацию о php модулях и т.д.
 //phpinfo();
-
 ?>
